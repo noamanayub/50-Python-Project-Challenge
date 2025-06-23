@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Validator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Email Validator</h2>
+        <form id="emailForm">
+            <input type="email" id="email" name="email" placeholder="Enter email address" required>
+            <button type="submit">Check</button>
+        </form>
+        <div class="divider">or</div>
+        <form id="fileForm" enctype="multipart/form-data">
+            <input type="file" id="fileInput" name="file" accept=".csv,application/json">
+            <button type="submit">Upload & Validate</button>
+        </form>
+        <div id="result"></div>
+        <div id="summary"></div>
+        <div id="tableResult"></div>
+        <div id="actions" style="margin-top:18px; display:none;">
+            <button id="downloadCsvBtn" type="button">Download CSV</button>
+            <button id="copyValidBtn" type="button">Copy Valid Emails</button>
+        </div>
+        <div id="progressBarContainer" style="display:none; margin-top:18px;">
+            <div id="progressBar" style="height:18px;width:0;background:#0078d7;border-radius:8px;transition:width 0.3s;"></div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            document.getElementById('result').innerHTML = "Checking...";
+            document.getElementById('tableResult').innerHTML = "";
+            const response = await fetch('/validate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email})
+            });
+            const data = await response.json();
+            let html = `<strong>Status:</strong> ${data.valid ? "VALID" : "INVALID"}<br>`;
+            html += `<strong>Syntax:</strong> ${data.syntax}<br>`;
+            html += `<strong>MX Record:</strong> ${data.domain}<br>`;
+            if (data.suggestion) {
+                html += `<strong>Suggestion:</strong> Did you mean <em>${data.suggestion}</em>?<br>`;
+            }
+            document.getElementById('result').innerHTML = html;
+        });
+
+        document.getElementById('fileForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            if (!fileInput.files.length) return;
+            document.getElementById('result').innerHTML = "";
+            document.getElementById('tableResult').innerHTML = "Processing...";
+            document.getElementById('summary').innerHTML = "";
+            document.getElementById('actions').style.display = 'none';
+            document.getElementById('progressBarContainer').style.display = 'block';
+            document.getElementById('progressBar').style.width = '0';
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            // Simulate progress bar for UX (since backend is synchronous)
+            let progress = 0;
+            const progressBar = document.getElementById('progressBar');
+            const progressInterval = setInterval(() => {
+                progress = Math.min(progress + Math.random() * 20, 90);
+                progressBar.style.width = progress + '%';
+            }, 200);
+            const response = await fetch('/validate_file', {
+                method: 'POST',
+                body: formData
+            });
+            clearInterval(progressInterval);
+            progressBar.style.width = '100%';
+            setTimeout(() => {
+                document.getElementById('progressBarContainer').style.display = 'none';
+                progressBar.style.width = '0';
+            }, 600);
+            const data = await response.json();
+            if (data.error) {
+                document.getElementById('tableResult').innerHTML = `<div class='error-message'>${data.error}</div>`;
+                document.getElementById('actions').style.display = 'none';
+                document.getElementById('summary').innerHTML = '';
+            } else {
+                let validCount = 0, invalidCount = 0;
+                let table = `<table class='result-table'><tr><th>Email</th><th>Status</th><th>Syntax</th><th>MX</th><th>Suggestion</th></tr>`;
+                let validEmails = [];
+                for (const r of data.results) {
+                    if (r.valid) { validCount++; validEmails.push(r.email); } else { invalidCount++; }
+                    table += `<tr><td>${r.email}</td><td>${r.valid ? '✔️' : '❌'}</td><td>${r.syntax}</td><td>${r.domain}</td><td>${r.suggestion || ''}</td></tr>`;
+                }
+                table += `</table>`;
+                document.getElementById('tableResult').innerHTML = table;
+                document.getElementById('summary').innerHTML = `<b>Total:</b> ${data.results.length} &nbsp; <span style='color:#388e3c'><b>Valid:</b> ${validCount}</span> &nbsp; <span style='color:#d32f2f'><b>Invalid:</b> ${invalidCount}</span>`;
+                document.getElementById('actions').style.display = 'block';
+                // Download CSV
+                document.getElementById('downloadCsvBtn').onclick = function() {
+                    let csv = 'email,valid,syntax,domain,suggestion\n';
+                    for (const r of data.results) {
+                        csv += `"${r.email}",${r.valid},${r.syntax},${r.domain},"${r.suggestion || ''}"\n`;
+                    }
+                    const blob = new Blob([csv], {type: 'text/csv'});
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'email_validation_results.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                };
+                // Copy valid emails
+                document.getElementById('copyValidBtn').onclick = function() {
+                    if (validEmails.length === 0) return;
+                    navigator.clipboard.writeText(validEmails.join('\n'));
+                    document.getElementById('copyValidBtn').innerText = 'Copied!';
+                    setTimeout(()=>{document.getElementById('copyValidBtn').innerText = 'Copy Valid Emails';}, 1200);
+                };
+            }
+        });
+    </script>
+</body>
+</html>
