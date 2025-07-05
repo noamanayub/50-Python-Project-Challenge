@@ -1,0 +1,18 @@
+{
+  "Alice": [
+    {
+      "id": "26436179-7661-4433-b953-46cfc3e47cb9",
+      "sender": "You",
+      "message": "16.png",
+      "type": "sticker",
+      "timestamp": "15:00"
+    },
+    {
+      "id": "b98fed68-d367-4538-80a1-20699dcceb81",
+      "sender": "Alice",
+      "message": "Love that one! \ud83c\udf89",
+      "type": "text",
+      "timestamp": "15:00"
+    }
+  ]
+}

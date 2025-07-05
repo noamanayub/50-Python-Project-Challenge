@@ -1,0 +1,21 @@
+# Advanced Image Slideshow - Requirements
+# Python dependencies for the slideshow application
+
+# Image processing library
+# Used for opening, resizing, and manipulating images
+# Supports various image formats (JPG, PNG, GIF, BMP, TIFF, etc.)
+Pillow>=9.0.0
+
+# Note: The following are built-in Python libraries and don't need to be installed separately:
+# - tkinter (GUI framework) - included with Python
+# - itertools (for cycling through images) - built-in
+# - os (file system operations) - built-in  
+# - random (for shuffle functionality) - built-in
+# - time (for timing operations) - built-in
+
+# Optional: For development and testing
+# pytest>=7.0.0
+# black>=22.0.0
+# flake8>=4.0.0
+
+# Minimum Python version required: 3.7+

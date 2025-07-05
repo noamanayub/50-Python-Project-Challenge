@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CipherChat - Modern Messaging</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header/Navbar -->
+        <header class="navbar">
+            <div class="navbar-content">
+                <div class="logo-section">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="CipherChat Logo" class="logo">
+                    <h1 class="app-title">CipherChat</h1>
+                </div>
+                <div class="navbar-actions">
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Online</span>
+                    </div>
+                    <div class="current-time" id="currentTime"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Chat Interface -->
+        <div class="main-container">
+            <!-- Sidebar - Contacts -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2><i class="fas fa-users"></i> Contacts</h2>
+                </div>
+                <div class="contacts-list" id="contactsList">
+                    {% for contact in contacts %}
+                    <div class="contact-item" data-contact="{{ contact }}">
+                        <div class="contact-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-name">{{ contact }}</div>
+                            <div class="contact-status">Online</div>
+                        </div>
+                        <div class="contact-indicator">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <main class="chat-area">
+                <div class="chat-header">
+                    <div class="chat-user-info">
+                        <div class="chat-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="chat-user-details">
+                            <h3 id="chatUserName">Select a contact</h3>
+                            <span id="chatUserStatus">Choose someone to start chatting</span>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="action-btn" id="clearChatBtn" title="Clear Chat">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="messages-container" id="messagesContainer">
+                    <div class="welcome-message">
+                        <div class="welcome-content">
+                            <i class="fas fa-comments"></i>
+                            <h3>Welcome to CipherChat</h3>
+                            <p>Select a contact from the sidebar to start messaging</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-input-area">
+                    <div class="input-container">
+                        <button class="input-btn" id="stickerBtn" title="Send Sticker">
+                            <i class="fas fa-smile"></i>
+                        </button>
+                        <textarea id="messageInput" placeholder="Type your message..." maxlength="500"></textarea>
+                        <button class="send-btn" id="sendBtn" title="Send Message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Sticker Modal -->
+    <div class="modal" id="stickerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-smile"></i> Choose a Sticker</h3>
+                <button class="close-btn" id="closeStickerModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sticker-grid" id="stickerGrid">
+                <!-- Stickers will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Loading CipherChat...</p>
+        </div>
+    </div>
+
+    <!-- Bulk Actions Bar -->
+    <div class="bulk-actions" id="bulkActions">
+        <span class="bulk-actions-text" id="bulkActionsText">0 messages selected</span>
+        <button class="bulk-action-btn" id="deselectAllBtn">Deselect All</button>
+        <button class="bulk-action-btn delete" id="deleteSelectedBtn">
+            <i class="fas fa-trash"></i> Delete Selected
+        </button>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="notificationToast">
+        <div class="toast-content">
+            <i class="fas fa-info-circle"></i>
+            <span id="toastMessage"></span>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
