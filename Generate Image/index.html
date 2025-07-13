@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-video"></i>
+                <h1>AI Video Generator</h1>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Ready</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Image Upload Section -->
+            <section class="upload-section">
+                <div class="upload-card">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3>Upload Your Image</h3>
+                        <p>Drop your image here or click to browse</p>
+                        <input type="file" id="imageInput" accept="image/*" hidden>
+                        <div class="upload-formats">
+                            <span>Supports: JPG, PNG, GIF, WebP</span>
+                        </div>
+                    </div>
+                    <div class="image-preview" id="imagePreview" style="display: none;">
+                        <img id="previewImg" src="" alt="Preview">
+                        <div class="image-info">
+                            <span id="imageName"></span>
+                            <button class="remove-btn" id="removeImage">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prompt Section -->
+            <section class="prompt-section">
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <h3>Describe Your Video</h3>
+                        <div class="prompt-counter">
+                            <span id="charCount">0</span>/500
+                        </div>
+                    </div>
+                    <div class="prompt-input-container">
+                        <textarea 
+                            id="promptInput" 
+                            placeholder="Describe how you want your image to transform into a video. Be specific about movements, effects, and style..."
+                            maxlength="500"
+                        ></textarea>
+                        <div class="prompt-suggestions">
+                            <div class="suggestion-tag" data-prompt="Make the character walk towards the camera with flowing hair">
+                                <i class="fas fa-walking"></i>
+                                Walking Animation
+                            </div>
+                            <div class="suggestion-tag" data-prompt="Add gentle floating particles and soft lighting effects">
+                                <i class="fas fa-sparkles"></i>
+                                Particle Effects
+                            </div>
+                            <div class="suggestion-tag" data-prompt="Create a zoom in effect with dramatic lighting">
+                                <i class="fas fa-search-plus"></i>
+                                Zoom Effect
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section class="settings-section">
+                <div class="settings-card">
+                    <h3>Video Settings</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="duration">Duration</label>
+                            <select id="duration">
+                                <option value="3">3 seconds</option>
+                                <option value="5" selected>5 seconds</option>
+                                <option value="10">10 seconds</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="quality">Quality</label>
+                            <select id="quality">
+                                <option value="720p">720p HD</option>
+                                <option value="1080p" selected>1080p Full HD</option>
+                                <option value="4k">4K Ultra HD</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="style">Style</label>
+                            <select id="style">
+                                <option value="realistic" selected>Realistic</option>
+                                <option value="cinematic">Cinematic</option>
+                                <option value="artistic">Artistic</option>
+                                <option value="anime">Anime</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="fps">Frame Rate</label>
+                            <select id="fps">
+                                <option value="24">24 FPS</option>
+                                <option value="30" selected>30 FPS</option>
+                                <option value="60">60 FPS</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Generate Button -->
+            <section class="generate-section">
+                <button class="generate-btn" id="generateBtn">
+                    <div class="btn-content">
+                        <i class="fas fa-magic"></i>
+                        <span>Generate Video</span>
+                    </div>
+                    <div class="btn-loader" style="display: none;">
+                        <div class="spinner"></div>
+                        <span>Generating...</span>
+                    </div>
+                </button>
+            </section>
+
+            <!-- Enhanced Prompt Section -->
+            <section class="enhanced-prompt-section" id="enhancedPromptSection" style="display: none;">
+                <div class="enhanced-prompt-card">
+                    <h3><i class="fas fa-brain"></i> AI Enhanced Your Prompt</h3>
+                    <div class="prompt-comparison">
+                        <div class="prompt-item">
+                            <label>Original:</label>
+                            <div class="prompt-text" id="originalPromptText"></div>
+                        </div>
+                        <div class="prompt-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="prompt-item">
+                            <label>Enhanced:</label>
+                            <div class="prompt-text enhanced" id="enhancedPromptText"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section class="progress-section" id="progressSection" style="display: none;">
+                <div class="progress-card">
+                    <h3>Processing Your Video</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span id="progressText">Initializing...</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="processing-steps">
+                        <div class="step" id="step1">
+                            <i class="fas fa-image"></i>
+                            <span>Analyzing Image</span>
+                        </div>
+                        <div class="step" id="step2">
+                            <i class="fas fa-brain"></i>
+                            <span>Processing Prompt</span>
+                        </div>
+                        <div class="step" id="step3">
+                            <i class="fas fa-video"></i>
+                            <span>Generating Frames</span>
+                        </div>
+                        <div class="step" id="step4">
+                            <i class="fas fa-film"></i>
+                            <span>Rendering Video</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="result-card">
+                    <h3>Your Generated Video</h3>
+                    <div class="video-container" style="position:relative;max-width:600px;margin:auto;">
+                        <div id="videoLoadingOverlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.7);z-index:2;justify-content:center;align-items:center;">
+                            <div class="spinner"></div>
+                        </div>
+                        <video id="resultVideo" controls preload="metadata" playsinline style="width:100%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.12);background:#000;">
+                            <source src="" type="video/mp4">
+                            <div style="padding:2rem;text-align:center;color:#888;">Your browser does not support the video tag.</div>
+                        </video>
+                    </div>
+                    <div class="result-actions">
+                        <button class="action-btn download-btn" id="downloadBtn">
+                            <i class="fas fa-download"></i>
+                            Download Video
+                        </button>
+                        <button class="action-btn share-btn" id="shareBtn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                        <button class="action-btn new-btn" id="newVideoBtn">
+                            <i class="fas fa-plus"></i>
+                            Create New
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 AI Video Generator. Founded by Noaman Ayub.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

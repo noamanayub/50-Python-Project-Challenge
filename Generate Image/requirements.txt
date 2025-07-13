@@ -1,0 +1,21 @@
+# Core web framework
+Flask==2.3.3
+Flask-CORS==4.0.0
+
+# Image and video processing
+opencv-python==4.8.1.78
+Pillow==10.0.1
+numpy==1.24.3
+
+# Hugging Face and ML libraries
+transformers==4.40.2
+torch==2.2.1
+tokenizers==0.19.1
+datasets==2.19.1
+
+# Utilities
+Werkzeug==2.3.7
+requests==2.31.0
+
+# Optional: For GPU acceleration (uncomment if you have CUDA)
+# torch==2.2.1+cu121 --index-url https://download.pytorch.org/whl/cu121
