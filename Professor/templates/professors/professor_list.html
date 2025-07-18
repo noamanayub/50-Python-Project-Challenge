@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+
+{% block title %}Professors Dashboard - {{ block.super }}{% endblock %}
+
+{% block extra_css %}
+    {% load static %}
+    <link href="{% static 'css/professor-list.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 fw-bold text-primary mb-0">
+                <i class="fas fa-chart-line me-2"></i>Professor Dashboard
+            </h2>
+            <div>
+                <a href="{% url 'professor_create' %}" class="btn btn-animated btn-primary-animated me-2">
+                    <i class="fas fa-plus me-1"></i>Add Professor
+                </a>
+                <a href="{% url 'csv_export' %}" class="btn btn-animated btn-success-animated">
+                    <i class="fas fa-download me-1"></i>Export CSV
+                </a>
+            </div>
+        </div>
+
+        <!-- CSV Import Form -->
+        <div class="table-container mb-4">
+            <h6 class="mb-3 text-light-custom">
+                <i class="fas fa-upload me-2"></i>Import from CSV
+            </h6>
+            <form method="post" action="{% url 'csv_import' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row align-items-end">
+                    <div class="col-md-8">
+                        {{ csv_form.csv_file }}
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-animated btn-info-animated w-100">
+                            <i class="fas fa-upload me-1"></i>Import CSV
+                        </button>
+                    </div>
+                </div>
+                <small class="text-light-small">
+                    <i class="fas fa-info-circle me-1"></i>
+                    CSV columns: name, university, research_interests, email, h_index, famous_articles, google_scholar_url, researchgate_url
+                </small>
+            </form>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="stats-grid mb-4">
+            <div class="stat-card">
+                <i class="fas fa-users stat-icon"></i>
+                <div class="stat-number">{{ statistics.total_professors }}</div>
+                <div class="stat-label">Total Professors</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-chart-bar stat-icon"></i>
+                <div class="stat-number">{{ statistics.avg_h_index }}</div>
+                <div class="stat-label">Average H-Index</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-university stat-icon"></i>
+                <div class="stat-number">{{ statistics.total_universities }}</div>
+                <div class="stat-label">Total Universities</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-microscope stat-icon"></i>
+                <div class="stat-number">{{ statistics.total_fields }}</div>
+                <div class="stat-label">Research Fields</div>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container-large mb-4">
+            <form method="get" class="row g-3">
+                <div class="col-md-5">
+                    <input type="text" 
+                           name="search" 
+                           class="search-input-large" 
+                           placeholder="Search professors by name or research interests..."
+                           value="{{ search_query }}">
+                </div>
+                <div class="col-md-4">
+                    <select name="university" class="search-input-large">
+                        <option value="">All Universities</option>
+                        {% for university in universities %}
+                            <option value="{{ university }}" {% if request.GET.university == university %}selected{% endif %}>
+                                {{ university }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="search-btn-large w-100">
+                        <i class="fas fa-search me-2"></i>Search
+                    </button>
+                </div>
+                {% if search_query or request.GET.university %}
+                <div class="col-12">
+                    <a href="{% url 'professor_list' %}" class="btn btn-animated btn-warning-animated">
+                        <i class="fas fa-times me-1"></i>Clear Filters
+                    </a>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+
+        <!-- Results Summary -->
+        {% if search_query or request.GET.university %}
+        <div class="alert alert-info-custom">
+            <i class="fas fa-search me-2"></i>
+            Found <strong>{{ professors|length }}</strong> professor(s)
+            {% if search_query %} matching "<strong>{{ search_query }}</strong>"{% endif %}
+            {% if request.GET.university %} from <strong>{{ request.GET.university }}</strong>{% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Professors Table -->
+        <div class="table-container">
+            <h6 class="mb-3 text-light-custom">
+                <i class="fas fa-table me-2"></i>Professors Directory
+            </h6>
+            {% if professors %}
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-image me-2"></i>Profile</th>
+                                <th><i class="fas fa-user me-2"></i>Name</th>
+                                <th><i class="fas fa-university me-2"></i>University</th>
+                                <th><i class="fas fa-envelope me-2"></i>Email</th>
+                                <th><i class="fas fa-chart-line me-2"></i>H-Index</th>
+                                <th><i class="fas fa-cogs me-2"></i>Actions</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                {% for professor in professors %}
+                                    <tr>
+                                        <td>
+                                            {% if professor.profile_picture %}
+                                                <img src="{{ professor.profile_picture.url }}" alt="{{ professor.name }}" class="profile-img">
+                                            {% else %}
+                                                <div class="profile-img bg-gradient d-flex align-items-center justify-content-center profile-img-placeholder">
+                                                    <i class="fas fa-user text-white"></i>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                        <td class="fw-semibold">{{ professor.name }}</td>
+                                        <td>
+                                            <span class="badge rounded-pill badge-info-gradient">
+                                                {{ professor.university }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="mailto:{{ professor.email }}" class="text-decoration-none">
+                                                {{ professor.email }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill fs-6 badge-success-gradient">
+                                                {{ professor.h_index }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="{% url 'professor_detail' professor.pk %}" 
+                                                   class="btn btn-sm btn-outline-info" 
+                                                   title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{% url 'professor_edit' professor.pk %}" 
+                                                   class="btn btn-sm btn-outline-primary" 
+                                                   title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="{% url 'professor_delete' professor.pk %}" 
+                                                   class="btn btn-sm btn-outline-danger" 
+                                                   title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No professors found</h5>
+                        {% if search_query %}
+                            <p class="text-muted">Try adjusting your search criteria</p>
+                            <a href="{% url 'professor_list' %}" class="btn btn-animated btn-primary-animated">
+                                <i class="fas fa-list me-1"></i>View All Professors
+                            </a>
+                        {% else %}
+                            <p class="text-muted">Start by adding your first professor</p>
+                            <a href="{% url 'professor_create' %}" class="btn btn-animated btn-primary-animated">
+                                <i class="fas fa-plus me-1"></i>Add First Professor
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll for search
+    const searchInput = document.querySelector('.search-input-large');
+    if (searchInput && window.location.hash === '#search') {
+        searchInput.focus();
+    }
+    
+    // Add focus effects to form elements
+    document.querySelectorAll('.search-input-large, .form-control').forEach(function(element) {
+        element.addEventListener('focus', function() {
+            this.style.transform = 'none';
+        });
+        
+        element.addEventListener('blur', function() {
+            this.style.transform = 'none';
+        });
+    });
+});
+</script>
+{% endblock %}

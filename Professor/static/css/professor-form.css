@@ -1,0 +1,401 @@
+/* Professor Form Specific Styles */
+
+/* ========================================
+   FORM CARD STYLING
+   ======================================== */
+.professor-form-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 10px 30px rgba(102, 126, 234, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.professor-form-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 25px 75px rgba(0, 0, 0, 0.6),
+        0 15px 40px rgba(102, 126, 234, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* ========================================
+   FORM HEADER STYLING
+   ======================================== */
+.professor-form-header {
+    background: var(--blue-gradient);
+    border-radius: 18px 18px 0 0;
+    padding: 25px 30px;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.professor-form-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.professor-form-header h3 {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.professor-form-header i {
+    margin-right: 12px;
+    font-size: 1.6rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* ========================================
+   PROFILE PICTURE SECTION
+   ======================================== */
+.profile-picture-section {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.image-preview-container {
+    position: relative;
+    display: inline-block;
+}
+
+.detail-profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 3px solid rgba(102, 126, 234, 0.3);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 4px 12px rgba(102, 126, 234, 0.2);
+    transition: all 0.3s ease;
+}
+
+.detail-profile-img:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.4),
+        0 6px 18px rgba(102, 126, 234, 0.3);
+    border-color: rgba(102, 126, 234, 0.5);
+}
+
+.upload-controls {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.upload-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.upload-button-group .btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.upload-button-group .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Hide the default file input */
+input[type="file"].d-none {
+    display: none !important;
+}
+
+/* Form label styling */
+.upload-controls .form-label {
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Help text styling */
+.upload-controls .text-muted {
+    font-size: 0.8rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Error styling */
+.upload-controls .text-danger {
+    font-size: 0.85rem;
+    text-align: center;
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+/* ========================================
+   FILE INPUT STYLING
+   ======================================== */
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(102, 126, 234, 0.4);
+    border-radius: 15px;
+    padding: 20px 30px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.file-input-wrapper:hover {
+    border-color: rgba(102, 126, 234, 0.7);
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+}
+
+.file-input-label {
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.file-input-label i {
+    margin-right: 10px;
+    font-size: 1.3rem;
+    background: var(--blue-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* ========================================
+   FORM FIELD GROUPS
+   ======================================== */
+.form-field-group {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    transition: all 0.3s ease;
+}
+
+.form-field-group:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.form-field-group .form-label {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.form-field-group .form-label i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    background: var(--blue-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.form-field-group .required-asterisk {
+    color: #ff6b6b;
+    font-weight: 900;
+    margin-left: 5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ========================================
+   ENHANCED FORM CONTROLS
+   ======================================== */
+.professor-form .form-control {
+    background: rgba(255, 255, 255, 0.97);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 15px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000000;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 
+        inset 0 2px 6px rgba(0, 0, 0, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    backdrop-filter: blur(10px);
+}
+
+.professor-form .form-control:focus {
+    background: rgba(255, 255, 255, 0.99);
+    border-color: rgba(102, 126, 234, 0.8);
+    box-shadow: 
+        inset 0 3px 8px rgba(0, 0, 0, 0.12),
+        0 8px 20px rgba(102, 126, 234, 0.3),
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        0 0 0 4px rgba(102, 126, 234, 0.15) inset,
+        0 0 30px rgba(102, 126, 234, 0.2);
+    transform: translateY(-3px) translateZ(5px);
+    outline: none;
+}
+
+.professor-form textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* ========================================
+   FORM VALIDATION STYLES
+   ======================================== */
+.form-error {
+    color: #ff6b6b;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 107, 107, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-left: 4px solid #ff6b6b;
+    backdrop-filter: blur(10px);
+}
+
+.form-error i {
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.form-help-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    font-style: italic;
+    margin-top: 6px;
+    padding-left: 5px;
+    border-left: 2px solid rgba(102, 126, 234, 0.3);
+    padding-left: 12px;
+}
+
+/* ========================================
+   FORM ACTIONS
+   ======================================== */
+.form-actions {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 25px 30px;
+    margin-top: 30px;
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-actions .btn-animated {
+    min-width: 150px;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.form-actions .btn-animated:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .professor-form-card {
+        margin: 10px;
+        border-radius: 15px;
+    }
+    
+    .professor-form-header {
+        padding: 20px;
+        border-radius: 13px 13px 0 0;
+    }
+    
+    .professor-form-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .profile-picture-section {
+        padding: 20px;
+    }
+    
+    .profile-picture-placeholder,
+    .detail-profile-img {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .form-actions .btn-animated {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .professor-form-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .form-field-group {
+        padding: 15px;
+    }
+    
+    .professor-form .form-control {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+}

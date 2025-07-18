@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ professor.name }} - {{ block.super }}{% endblock %}
+
+{% block extra_css %}
+    {% load static %}
+    <link href="{% static 'css/professor-detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="display-6 fw-bold">
+                <i class="fas fa-user-graduate me-3"></i>{{ professor.name }}
+            </h1>
+            <div>
+                <a href="{% url 'professor_edit' professor.pk %}" class="btn btn-primary me-2">
+                    <i class="fas fa-edit me-2"></i>Edit
+                </a>
+                <a href="{% url 'professor_delete' professor.pk %}" class="btn btn-danger me-2">
+                    <i class="fas fa-trash me-2"></i>Delete
+                </a>
+                <a href="{% url 'professor_list' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        {% if professor.profile_picture %}
+                            <img src="{{ professor.profile_picture.url }}" alt="{{ professor.name }}" class="detail-profile-img mb-3">
+                        {% else %}
+                            <div class="detail-profile-img bg-secondary d-flex align-items-center justify-content-center mx-auto mb-3">
+                                <i class="fas fa-user fa-4x text-white"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="mb-4">
+                            <h4 class="fw-bold text-primary">{{ professor.name }}</h4>
+                            <p class="text-muted fs-5 mb-3">{{ professor.university }}</p>
+                            
+                            <!-- Statistics badges -->
+                            <div class="d-flex justify-content-center gap-2 mb-3">
+                                <span class="badge rounded-pill fs-6 px-3 py-2 badge-success-gradient">
+                                    <i class="fas fa-chart-line me-1"></i>H-Index: {{ professor.h_index }}
+                                </span>
+                            </div>
+                            
+                            <!-- Contact button -->
+                            <a href="mailto:{{ professor.email }}" class="btn btn-info">
+                                <i class="fas fa-envelope me-2"></i>Contact
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-9">
+                        <!-- Contact Information -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="card border-0 bg-light">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary mb-3">
+                                            <i class="fas fa-address-card me-2"></i>Contact Information
+                                        </h5>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i class="fas fa-envelope text-primary me-3"></i>
+                                                    <a href="mailto:{{ professor.email }}" class="text-decoration-none">
+                                                        {{ professor.email }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i class="fas fa-university text-primary me-3"></i>
+                                                    <span>{{ professor.university }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Academic Profiles -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="card border-0 card-blue-gradient">
+                                    <div class="card-body text-center">
+                                        <i class="fab fa-google fa-3x text-primary mb-3"></i>
+                                        <h6 class="card-title">Google Scholar</h6>
+                                        {% if professor.google_scholar_url %}
+                                            <a href="{{ professor.google_scholar_url }}" target="_blank" class="btn btn-animated btn-primary-animated btn-sm">
+                                                <i class="fas fa-external-link-alt me-2"></i>View Profile
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted">Not provided</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card border-0 card-green-gradient">
+                                    <div class="card-body text-center">
+                                        <i class="fab fa-researchgate fa-3x text-success mb-3"></i>
+                                        <h6 class="card-title">ResearchGate</h6>
+                                        {% if professor.researchgate_url %}
+                                            <a href="{{ professor.researchgate_url }}" target="_blank" class="btn btn-animated btn-success-animated btn-sm">
+                                                <i class="fas fa-external-link-alt me-2"></i>View Profile
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted">Not provided</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Research Interests -->
+                        <div class="card border-0 mb-4 card-orange-gradient">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary mb-3">
+                                    <i class="fas fa-microscope me-2"></i>Research Interests
+                                </h5>
+                                <div class="research-interests">
+                                    {{ professor.research_interests|linebreaks }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Famous Articles -->
+                        <div class="card border-0" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary mb-3">
+                                    <i class="fas fa-file-alt me-2"></i>Notable Publications
+                                </h5>
+                                <div class="famous-articles">
+                                    {{ professor.famous_articles|linebreaks }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-footer bg-light">
+                <div class="row text-center">
+                    <div class="col-md-6">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar-plus me-2"></i>
+                            <strong>Created:</strong> {{ professor.created_at|date:"F d, Y \a\t g:i A" }}
+                        </small>
+                    </div>
+                    <div class="col-md-6">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar-edit me-2"></i>
+                            <strong>Last Updated:</strong> {{ professor.updated_at|date:"F d, Y \a\t g:i A" }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

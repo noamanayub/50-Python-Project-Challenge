@@ -1,0 +1,226 @@
+/* Professor List Specific Styles - Clean Light Design */
+
+/* ========================================
+   PAGE LAYOUT - CLEAN
+   ======================================== */
+body {
+    background: #f8f9fa !important;
+    color: #495057 !important;
+}
+
+body::before {
+    display: none !important;
+}
+
+/* ========================================
+   HEADER STYLES
+   ======================================== */
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-header h1 {
+    color: #495057;
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    color: #6c757d;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* ========================================
+   CSV IMPORT SECTION
+   ======================================== */
+.csv-import-section {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.csv-import-title {
+    color: #495057;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0 0 15px 0;
+}
+
+/* ========================================
+   SEARCH SECTION
+   ======================================== */
+.search-section {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-title {
+    color: #495057;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0 0 15px 0;
+}
+
+/* ========================================
+   STATISTICS CARDS
+   ======================================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 25px 20px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stat-number {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* ========================================
+   PROFESSORS TABLE SECTION
+   ======================================== */
+.professors-table-section {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-title {
+    color: #495057;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0 0 15px 0;
+}
+
+.table {
+    background: #ffffff;
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.table tbody tr {
+    background: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody td {
+    border: none;
+    padding: 12px 15px;
+    color: #495057;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+/* ========================================
+   UTILITY CLASSES OVERRIDE
+   ======================================== */
+.text-light-custom {
+    color: #495057 !important;
+    font-weight: 600 !important;
+}
+
+.text-light-small {
+    color: #6c757d !important;
+    margin-top: 10px !important;
+    display: block !important;
+}
+
+.alert-info-custom {
+    background: #d1ecf1 !important;
+    border: 1px solid #bee5eb !important;
+    color: #0c5460 !important;
+    border-radius: 8px !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* ========================================
+   BADGE STYLES
+   ======================================== */
+.badge-info-gradient {
+    background: #17a2b8 !important;
+    color: white !important;
+}
+
+.badge-success-gradient {
+    background: #28a745 !important;
+    color: white !important;
+}
+
+/* ========================================
+   PROFILE IMAGE
+   ======================================== */
+.profile-img-placeholder {
+    background: #6c757d !important;
+}
+
+/* Remove any remaining complex animations */
+* {
+    transform: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn:hover {
+    transform: none !important;
+}
+
+.card:hover {
+    transform: translateY(-2px) !important;
+}

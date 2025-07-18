@@ -1,0 +1,1147 @@
+/* Professor Scholarship Management System - Custom Styles */
+
+/* ========================================
+   ROOT VARIABLES
+   ======================================== */
+:root {
+    --primary-dark: #0a0a0a;
+    --secondary-dark: #1a1a2e;
+    --accent-purple: #16213e;
+    --blue-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --purple-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    --dark-gradient: linear-gradient(135deg, #0f0f23 0%, #16213e 100%);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --hover-shadow: 0 16px 64px rgba(0, 0, 0, 0.4);
+    --text-light: #e8e8e8;
+    --text-dark: #000000;
+    --text-hover: #000000;
+}
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+body {
+    background: #f8f9fa;
+    min-height: 100vh;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #495057;
+    overflow-x: hidden;
+}
+
+/* Remove 3D Background Pattern */
+body::before {
+    display: none;
+}
+
+/* ========================================
+   NAVIGATION BAR STYLES
+   ======================================== */
+.navbar {
+    background: #ffffff !important;
+    backdrop-filter: none;
+    border-bottom: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #007bff !important;
+}
+
+.navbar-nav .nav-link {
+    color: #495057 !important;
+    font-weight: 500;
+    margin: 0 10px;
+    padding: 10px 20px !important;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    background: rgba(0, 123, 255, 0.1);
+    transform: none;
+    color: #007bff !important;
+}
+
+/* ========================================
+   CARD STYLES
+   ======================================== */
+.card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 50%, rgba(240, 248, 255, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #007bff 0%, #17a2b8 50%, #28a745 100%) 1;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.02) 0%, rgba(23, 162, 184, 0.02) 50%, rgba(40, 167, 69, 0.02) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-image: linear-gradient(135deg, #007bff 0%, #17a2b8 30%, #28a745 60%, #ffc107 100%) 1;
+    border-width: 4px;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* ========================================
+   BUTTON STYLES - SIMPLIFIED
+   ======================================== */
+.btn-animated {
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary-animated {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+.btn-primary-animated:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-success-animated {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    color: white;
+    border: 1px solid transparent;
+}
+
+.btn-success-animated:hover {
+    background: linear-gradient(135deg, #1e7e34 0%, #155724 100%);
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.btn-info-animated {
+    background: linear-gradient(135deg, #17a2b8 0%, #117a8b 100%);
+    color: white;
+    border: 1px solid transparent;
+}
+
+.btn-info-animated:hover {
+    background: linear-gradient(135deg, #117a8b 0%, #0c5460 100%);
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+}
+
+.btn-warning-animated {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+    color: #212529;
+    border: 1px solid transparent;
+}
+
+.btn-warning-animated:hover {
+    background: linear-gradient(135deg, #e0a800 0%, #d39e00 100%);
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.btn-danger-animated {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border: 1px solid transparent;
+}
+
+.btn-danger-animated:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Remove the complex animations */
+.btn-animated::before {
+    display: none;
+}
+
+/* Table action buttons */
+.btn-group .btn {
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    margin: 0 1px;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-info {
+    color: #17a2b8;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #17a2b8, #0c5460) border-box;
+}
+
+.btn-outline-info:hover {
+    background: linear-gradient(135deg, #17a2b8 0%, #117a8b 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(23, 162, 184, 0.3);
+}
+
+.btn-outline-primary {
+    color: #007bff;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #007bff, #0056b3) border-box;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #dc3545, #c82333) border-box;
+}
+
+.btn-outline-danger:hover {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+/* ========================================
+   FORM STYLES
+   ======================================== */
+.form-control {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #e9ecef, #ced4da) 1;
+    border-radius: 6px;
+    color: #495057;
+    padding: 12px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.form-control:focus {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%);
+    border-image: linear-gradient(135deg, #007bff, #0056b3) 1;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25), 0 4px 12px rgba(0, 123, 255, 0.1);
+    color: #495057;
+    outline: none;
+    backdrop-filter: blur(10px);
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+}
+
+.form-control:disabled {
+    background: #e9ecef;
+    color: #6c757d;
+}
+
+/* Textarea specific styling */
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 252, 255, 0.9) 100%);
+    border-image: linear-gradient(135deg, #e9ecef, #dee2e6, #ced4da) 1;
+}
+
+textarea.form-control:focus {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%);
+    border-image: linear-gradient(135deg, #007bff, #17a2b8, #0056b3) 1;
+}
+
+/* File input styling */
+input[type="file"].form-control {
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+    border: 2px dashed transparent;
+    border-image: linear-gradient(135deg, #ced4da, #adb5bd) 1;
+    backdrop-filter: blur(5px);
+}
+
+input[type="file"].form-control:focus {
+    border-style: solid;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%);
+    border-image: linear-gradient(135deg, #007bff, #0056b3) 1;
+    backdrop-filter: blur(10px);
+}
+
+.form-label {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    text-shadow: none;
+}
+
+/* ========================================
+   PROFILE IMAGE STYLES
+   ======================================== */
+.profile-img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-color: #007bff;
+}
+
+.detail-profile-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #e9ecef;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.detail-profile-img:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-color: #007bff;
+}
+
+/* ========================================
+   SEARCH BAR STYLES - SIMPLIFIED
+   ======================================== */
+.search-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.search-input {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #007bff, #17a2b8, #28a745) 1;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #495057;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(15px);
+    color: #495057;
+    border-image: linear-gradient(135deg, #007bff, #0056b3) 1;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25), 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.search-input::placeholder {
+    color: #6c757d;
+    font-weight: 400;
+}
+
+select.search-input {
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 249, 250, 0.8) 100%), 
+                url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: calc(100% - 12px) center, right 12px center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: auto, 16px 12px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    backdrop-filter: blur(10px);
+}
+
+select.search-input:focus {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 248, 255, 0.9) 100%), 
+                url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23007bff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: calc(100% - 12px) center, right 12px center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: auto, 16px 12px;
+}
+
+/* Large Search Bar Styling - Simplified */
+.search-container-large {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.search-input-large {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #007bff, #17a2b8, #28a745) 1;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #495057;
+    font-size: 0.95rem;
+    font-weight: 500;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-input-large:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(15px);
+    color: #495057;
+    border-image: linear-gradient(135deg, #007bff, #0056b3) 1;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25), 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.search-btn {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 12px 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
+}
+
+.search-btn:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    color: white;
+}
+
+.search-btn-large {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 12px 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
+}
+
+.search-btn-large:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    color: white;
+}
+
+/* ========================================
+   TABLE STYLES - SIMPLIFIED
+   ======================================== */
+.table-container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 50%, rgba(240, 248, 255, 0.95) 100%);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, rgba(200, 200, 200, 0.3), rgba(0, 123, 255, 0.1)) 1;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.table {
+    background: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table tbody tr {
+    background: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody td {
+    border: none;
+    padding: 12px 15px;
+    color: #495057;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ========================================
+   STATISTICS CARDS
+   ======================================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 20%, rgba(240, 248, 255, 0.95) 100%);
+    border-radius: 12px;
+    padding: 25px 20px;
+    text-align: center;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #e9ecef, #dee2e6, #007bff) 1;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.05) 0%, rgba(23, 162, 184, 0.05) 50%, rgba(40, 167, 69, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-image: linear-gradient(135deg, #007bff, #17a2b8, #28a745) 1;
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+.stat-number {
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #007bff 0%, #17a2b8 50%, #28a745 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #007bff 0%, #17a2b8 50%, #28a745 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    display: block;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px rgba(0, 123, 255, 0.2));
+}
+
+/* ========================================
+   ALERT STYLES
+   ======================================== */
+.alert {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    color: #495057;
+}
+
+/* ========================================
+   PAGINATION STYLES
+   ======================================== */
+.pagination .page-link {
+    border: 1px solid #dee2e6;
+    color: #007bff;
+    margin: 0 2px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+
+.pagination .page-link:hover {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+    transform: translateY(-1px);
+}
+
+.pagination .page-item.active .page-link {
+    background: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+/* ========================================
+   BADGE STYLES
+   ======================================== */
+.badge {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   TEXT AND LINK STYLES
+   ======================================== */
+a {
+    color: #007bff;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+.text-primary {
+    color: #007bff !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+.text-light {
+    color: #495057 !important;
+}
+
+.text-dark {
+    color: #495057 !important;
+}
+
+/* Ensure all input text is visible */
+input, textarea, select {
+    color: #495057 !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    color: #495057 !important;
+}
+
+/* Option elements in selects */
+option {
+    color: #495057;
+    background: #ffffff;
+}
+
+/* Label styling for better visibility */
+label {
+    color: #495057;
+    font-weight: 600;
+    text-shadow: none;
+}
+
+/* Button text visibility */
+.btn {
+    font-weight: 600;
+    text-shadow: none;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.profile-img-placeholder {
+    background: #6c757d !important;
+}
+
+.badge-info-gradient {
+    background: #17a2b8 !important;
+    color: white !important;
+}
+
+.badge-success-gradient {
+    background: #28a745 !important;
+    color: white !important;
+}
+
+.card-header-primary {
+    background: #007bff !important;
+    color: white !important;
+}
+
+.card-header-danger {
+    background: #dc3545 !important;
+    color: white !important;
+}
+
+.alert-info-custom {
+    background: #d1ecf1 !important;
+    border: 1px solid #bee5eb !important;
+    color: #0c5460 !important;
+    border-radius: 8px !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.alert-warning-custom {
+    background: #fff3cd !important;
+    border: 1px solid #ffeaa7 !important;
+    color: #856404 !important;
+}
+
+.alert-danger-custom {
+    background: #f8d7da !important;
+    border: 1px solid #f5c6cb !important;
+    color: #721c24 !important;
+}
+
+.card-blue-gradient {
+    background: #e3f2fd !important;
+    border: 1px solid #bbdefb !important;
+}
+
+.card-green-gradient {
+    background: #e8f5e8 !important;
+    border: 1px solid #c8e6c9 !important;
+}
+
+.card-orange-gradient {
+    background: #fff3e0 !important;
+    border: 1px solid #ffe0b2 !important;
+}
+
+.card-pink-gradient {
+    background: #fce4ec !important;
+    border: 1px solid #f8bbd9 !important;
+}
+
+.text-light-custom {
+    color: #495057 !important;
+    font-weight: 600 !important;
+}
+
+.text-light-small {
+    color: #6c757d !important;
+    margin-top: 10px !important;
+    display: block !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+}
+
+/* ========================================
+   ANIMATIONS - SIMPLIFIED
+   ======================================== */
+.fade-in {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   CONTAINER AND SPACING
+   ======================================== */
+.container-fluid {
+    padding: 2rem;
+}
+
+.main-content {
+    min-height: calc(100vh - 80px);
+}
+
+/* ========================================
+   CARD HEADER AND BODY STYLES
+   ======================================== */
+.card-header {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(23, 162, 184, 0.08) 50%, rgba(40, 167, 69, 0.05) 100%) !important;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(135deg, #007bff, #17a2b8, #28a745) 1;
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 2;
+}
+
+.card-body {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 2;
+}
+
+.card-title {
+    background: linear-gradient(135deg, #007bff 0%, #17a2b8 50%, #28a745 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+}
+
+.card-text {
+    color: #495057;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+}
+
+/* Detail view specific cards */
+.detail-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 252, 255, 0.98) 30%, rgba(240, 248, 255, 0.98) 100%);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #007bff 0%, #17a2b8 25%, #28a745 50%, #ffc107 75%, #dc3545 100%) 1;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(15px);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.03) 0%, rgba(23, 162, 184, 0.025) 25%, rgba(40, 167, 69, 0.02) 50%, rgba(255, 193, 7, 0.015) 75%, rgba(220, 53, 69, 0.01) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.detail-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.18), 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-image: linear-gradient(135deg, #007bff 0%, #17a2b8 20%, #28a745 40%, #ffc107 60%, #dc3545 80%, #6f42c1 100%) 1;
+    border-width: 4px;
+}
+
+.detail-card:hover::before {
+    opacity: 1;
+}
+
+/* ========================================
+   ENHANCED GRADIENT BORDER VARIATIONS
+   ======================================== */
+/* Professor info cards with enhanced borders */
+.professor-info-card {
+    border: 4px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(45deg, #007bff 0%, #17a2b8 25%, #28a745 50%, #ffc107 75%, #dc3545 100%) 1;
+    animation: borderGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes borderGlow {
+    0% {
+        border-image: linear-gradient(45deg, #007bff 0%, #17a2b8 25%, #28a745 50%, #ffc107 75%, #dc3545 100%) 1;
+    }
+    100% {
+        border-image: linear-gradient(45deg, #dc3545 0%, #ffc107 25%, #28a745 50%, #17a2b8 75%, #007bff 100%) 1;
+    }
+}
+
+/* Research interest cards */
+.research-card {
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #17a2b8 0%, #007bff 50%, #6f42c1 100%) 1;
+    position: relative;
+}
+
+.research-card::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, #17a2b8, #007bff, #6f42c1);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.research-card:hover::after {
+    opacity: 0.2;
+}
+
+/* Publication cards */
+.publication-card {
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #28a745 0%, #20c997 30%, #17a2b8 60%, #007bff 100%) 1;
+}
+
+/* Contact info cards */
+.contact-card {
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #ffc107 0%, #fd7e14 30%, #dc3545 60%, #e83e8c 100%) 1;
+}
+
+/* H-index and metrics cards enhanced borders */
+.metric-card {
+    border: 4px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #6f42c1 0%, #007bff 25%, #17a2b8 50%, #28a745 75%, #ffc107 100%) 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.metric-card:hover::before {
+    left: 100%;
+}
+
+/* ========================================
+   TABLE CELL GRADIENT VALUES
+   ======================================== */
+/* University column gradient styling */
+.table tbody td.university-cell,
+.table tbody td[data-label="University"],
+td.university-value {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(23, 162, 184, 0.08) 50%, rgba(40, 167, 69, 0.05) 100%) !important;
+    border-radius: 6px;
+    padding: 8px 12px !important;
+    font-weight: 600;
+    color: #007bff !important;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #007bff, #17a2b8) 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.table tbody td.university-cell::before,
+.table tbody td[data-label="University"]::before,
+td.university-value::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.table tbody tr:hover td.university-cell::before,
+.table tbody tr:hover td[data-label="University"]::before,
+tr:hover td.university-value::before {
+    left: 100%;
+}
+
+.table tbody td.university-cell span,
+.table tbody td[data-label="University"] span,
+td.university-value span {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #007bff 0%, #17a2b8 50%, #28a745 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* H-Index column gradient styling */
+.table tbody td.h-index-cell,
+.table tbody td[data-label="H-Index"],
+td.h-index-value {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(255, 193, 7, 0.08) 50%, rgba(220, 53, 69, 0.05) 100%) !important;
+    border-radius: 6px;
+    padding: 8px 12px !important;
+    font-weight: 600;
+    color: #28a745 !important;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #28a745, #ffc107) 1;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.table tbody td.h-index-cell::before,
+.table tbody td[data-label="H-Index"]::before,
+td.h-index-value::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(40, 167, 69, 0.3), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.table tbody tr:hover td.h-index-cell::before,
+.table tbody tr:hover td[data-label="H-Index"]::before,
+tr:hover td.h-index-value::before {
+    left: 100%;
+}
+
+.table tbody td.h-index-cell span,
+.table tbody td[data-label="H-Index"] span,
+td.h-index-value span {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #28a745 0%, #ffc107 50%, #dc3545 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* General gradient cell styling for any special values */
+.gradient-cell {
+    background: linear-gradient(135deg, rgba(111, 66, 193, 0.1) 0%, rgba(0, 123, 255, 0.08) 50%, rgba(23, 162, 184, 0.05) 100%) !important;
+    border-radius: 6px;
+    padding: 8px 12px !important;
+    font-weight: 600;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    border-image: linear-gradient(135deg, #6f42c1, #007bff, #17a2b8) 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.gradient-cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(111, 66, 193, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.table tbody tr:hover .gradient-cell::before {
+    left: 100%;
+}
+
+.gradient-cell span {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #6f42c1 0%, #007bff 50%, #17a2b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* Enhanced table row hover effects */
+.table tbody tr:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 252, 255, 0.95) 100%) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+    transition: all 0.3s ease;
+}

@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if object %}Edit {{ object.name }}{% else %}Add New Professor{% endif %} - {{ block.super }}
+{% endblock %}
+
+{% block extra_css %}
+    {% load static %}
+    <link href="{% static 'css/professor-form.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    {% if object %}
+                        <i class="fas fa-edit me-2"></i>Edit Professor
+                    {% else %}
+                        <i class="fas fa-plus me-2"></i>Add New Professor
+                    {% endif %}
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <!-- Profile Picture -->
+                        <div class="col-md-12 mb-4">
+                            <div class="text-center">
+                                <div class="profile-picture-section">
+                                    <!-- Image Preview -->
+                                    <div class="image-preview-container mb-3">
+                                        {% if object.profile_picture %}
+                                            <img src="{{ object.profile_picture.url }}" alt="{{ object.name }}" class="detail-profile-img" id="imagePreview">
+                                        {% else %}
+                                            <div class="detail-profile-img bg-secondary d-flex align-items-center justify-content-center mx-auto" id="imagePreview">
+                                                <i class="fas fa-user fa-3x text-white"></i>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <!-- Upload Controls -->
+                                    <div class="upload-controls">
+                                        <label for="{{ form.profile_picture.id_for_label }}" class="form-label fw-bold mb-2">
+                                            <i class="fas fa-camera me-2"></i>Profile Picture
+                                        </label>
+                                        
+                                        <!-- Hidden file input -->
+                                        <input type="file" 
+                                               id="{{ form.profile_picture.id_for_label }}" 
+                                               name="{{ form.profile_picture.name }}"
+                                               class="d-none"
+                                               accept="image/*">
+                                        
+                                        <!-- Upload button -->
+                                        <div class="upload-button-group">
+                                            <button type="button" class="btn btn-outline-primary me-2" id="selectImageBtn">
+                                                <i class="fas fa-upload me-2"></i>Choose Image
+                                            </button>
+                                            {% if object.profile_picture %}
+                                                <button type="button" class="btn btn-outline-danger" id="removeImageBtn">
+                                                    <i class="fas fa-trash me-2"></i>Remove
+                                                </button>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <small class="text-muted d-block mt-2">
+                                            Accepted formats: JPG, PNG, GIF (Max 5MB)
+                                        </small>
+                                        
+                                        {% if form.profile_picture.errors %}
+                                            <div class="text-danger small mt-2">
+                                                {{ form.profile_picture.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Name -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.name.id_for_label }}" class="form-label fw-bold">
+                                <i class="fas fa-user me-2"></i>Name <span class="text-danger">*</span>
+                            </label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.name.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- University -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.university.id_for_label }}" class="form-label fw-bold">
+                                <i class="fas fa-university me-2"></i>University <span class="text-danger">*</span>
+                            </label>
+                            {{ form.university }}
+                            {% if form.university.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.university.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Email -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="form-label fw-bold">
+                                <i class="fas fa-envelope me-2"></i>Email <span class="text-danger">*</span>
+                            </label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- H-Index -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.h_index.id_for_label }}" class="form-label fw-bold">
+                                <i class="fas fa-chart-line me-2"></i>H-Index <span class="text-danger">*</span>
+                            </label>
+                            {{ form.h_index }}
+                            {% if form.h_index.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.h_index.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Research Interests -->
+                    <div class="mb-3">
+                        <label for="{{ form.research_interests.id_for_label }}" class="form-label fw-bold">
+                            <i class="fas fa-microscope me-2"></i>Research Interests <span class="text-danger">*</span>
+                        </label>
+                        {{ form.research_interests }}
+                        {% if form.research_interests.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.research_interests.errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-text">
+                            Describe your main areas of research and expertise.
+                        </div>
+                    </div>
+                    
+                    <!-- Famous Articles -->
+                    <div class="mb-3">
+                        <label for="{{ form.famous_articles.id_for_label }}" class="form-label fw-bold">
+                            <i class="fas fa-file-alt me-2"></i>Famous Articles <span class="text-danger">*</span>
+                        </label>
+                        {{ form.famous_articles }}
+                        {% if form.famous_articles.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.famous_articles.errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-text">
+                            List your most notable publications and research papers.
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Google Scholar URL -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.google_scholar_url.id_for_label }}" class="form-label fw-bold">
+                                <i class="fab fa-google me-2"></i>Google Scholar URL <span class="text-danger">*</span>
+                            </label>
+                            {{ form.google_scholar_url }}
+                            {% if form.google_scholar_url.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.google_scholar_url.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                Link to your Google Scholar profile.
+                            </div>
+                        </div>
+                        
+                        <!-- ResearchGate URL -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.researchgate_url.id_for_label }}" class="form-label fw-bold">
+                                <i class="fab fa-researchgate me-2"></i>ResearchGate URL <span class="text-danger">*</span>
+                            </label>
+                            {{ form.researchgate_url }}
+                            {% if form.researchgate_url.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.researchgate_url.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                Link to your ResearchGate profile.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'professor_list' %}" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>Cancel
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>
+                                    {% if object %}Update Professor{% else %}Create Professor{% endif %}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('{{ form.profile_picture.id_for_label }}');
+    const selectImageBtn = document.getElementById('selectImageBtn');
+    const removeImageBtn = document.getElementById('removeImageBtn');
+    const imagePreview = document.getElementById('imagePreview');
+    
+    // Handle select image button click
+    if (selectImageBtn && fileInput) {
+        selectImageBtn.addEventListener('click', function() {
+            fileInput.click();
+        });
+    }
+    
+    // Handle file selection
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Validate file size (5MB max)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size must be less than 5MB');
+                    fileInput.value = '';
+                    return;
+                }
+                
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select a valid image file');
+                    fileInput.value = '';
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (imagePreview) {
+                        if (imagePreview.tagName === 'IMG') {
+                            imagePreview.src = e.target.result;
+                        } else {
+                            // Replace placeholder div with img
+                            const newImg = document.createElement('img');
+                            newImg.src = e.target.result;
+                            newImg.className = 'detail-profile-img';
+                            newImg.alt = 'Profile Preview';
+                            newImg.id = 'imagePreview';
+                            imagePreview.parentNode.replaceChild(newImg, imagePreview);
+                        }
+                        
+                        // Show remove button if it exists
+                        if (removeImageBtn) {
+                            removeImageBtn.style.display = 'inline-block';
+                        }
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    
+    // Handle remove image button click
+    if (removeImageBtn) {
+        removeImageBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to remove the profile picture?')) {
+                // Clear file input
+                if (fileInput) {
+                    fileInput.value = '';
+                }
+                
+                // Replace image with placeholder
+                if (imagePreview) {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'detail-profile-img bg-secondary d-flex align-items-center justify-content-center mx-auto';
+                    placeholder.id = 'imagePreview';
+                    placeholder.innerHTML = '<i class="fas fa-user fa-3x text-white"></i>';
+                    imagePreview.parentNode.replaceChild(placeholder, imagePreview);
+                }
+                
+                // Hide remove button
+                removeImageBtn.style.display = 'none';
+            }
+        });
+    }
+});
+</script>
+
+{% endblock %}
