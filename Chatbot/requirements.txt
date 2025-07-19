@@ -1,0 +1,4 @@
+tkinter
+fuzzywuzzy
+python-Levenshtein
+pdfplumber
