@@ -15,8 +15,8 @@ To run this project, you need to have Python installed on your system. You can d
 
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/noamanayub/ai-chatbot.git
-   cd ai-chatbot
+   git clone https://github.com/noamanayub/50-Python-Project-Challenge
+   cd 50-Python-Project-Challenge
    ```
 
 2. **Install the required dependencies**:
@@ -27,7 +27,7 @@ To run this project, you need to have Python installed on your system. You can d
 ## How to Run
 1. **Navigate to the project directory**:
    ```sh
-   cd ai-chatbot
+   cd Chatbot
    ```
 
 2. **Run the chatbot**:
