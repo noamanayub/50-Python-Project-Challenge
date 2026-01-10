@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}List Your Item - RentHub{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>List Your Item</h1>
+            <p>Start earning by renting out items you own</p>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 60px 0;">
+    <div class="container">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h2>Coming Soon</h2>
+            <p>This feature is under development. Check back soon!</p>
+            <a href="{% url 'home' %}" class="btn btn-primary" style="margin-top: 20px;">Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

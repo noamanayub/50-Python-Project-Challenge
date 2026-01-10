@@ -1,0 +1,410 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}RentHub - Rent Anything, Anytime{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Rent Anything, Anytime</h1>
+                <p>From tools to tech, furniture to fashion - your perfect rental is just a click away</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="document.querySelector('.featured-section').scrollIntoView({behavior: 'smooth'});">Start Renting</button>
+                    <a href="{% url 'list-item' %}" class="btn btn-secondary">List Your Items</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Popular Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Vehicles</h3>
+                    <p>5,234 items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Electronics</h3>
+                    <p>8,156 items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Tools</h3>
+                    <p>3,421 items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Cameras</h3>
+                    <p>2,987 items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3>Furniture</h3>
+                    <p>4,567 items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Gaming</h3>
+                    <p>6,234 items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Fashion</h3>
+                    <p>7,890 items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-volleyball-ball"></i>
+                    </div>
+                    <h3>Sports</h3>
+                    <p>3,654 items</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Items Section -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Rentals</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-badge">Featured</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" alt="Product">
+                        <button class="wishlist-btn" onclick="event.stopPropagation();"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Electronics</div>
+                        <h3 class="product-title">Professional Camera Kit</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(124)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$45</span>
+                            <span class="period">/day</span>
+                        </div>
+                        <button class="btn-rent">Rent Now</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-badge hot">Hot</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400" alt="Product">
+                        <button class="wishlist-btn" onclick="event.stopPropagation();"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Vehicles</div>
+                        <h3 class="product-title">Luxury SUV</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(89)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$85</span>
+                            <span class="period">/day</span>
+                        </div>
+                        <button class="btn-rent">Rent Now</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" alt="Product">
+                        <button class="wishlist-btn" onclick="event.stopPropagation();"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Electronics</div>
+                        <h3 class="product-title">Wireless Headphones</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(56)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$12</span>
+                            <span class="period">/day</span>
+                        </div>
+                        <button class="btn-rent">Rent Now</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-badge">New</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400" alt="Product">
+                        <button class="wishlist-btn" onclick="event.stopPropagation();"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Furniture</div>
+                        <h3 class="product-title">Modern Sofa Set</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(143)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$35</span>
+                            <span class="period">/week</span>
+                        </div>
+                        <button class="btn-rent">Rent Now</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1586920740099-44f76d89c44b?w=400" alt="Product">
+                        <button class="wishlist-btn" onclick="event.stopPropagation();"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Tools</div>
+                        <h3 class="product-title">Power Drill Set</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(78)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$18</span>
+                            <span class="period">/day</span>
+                        </div>
+                        <button class="btn-rent">Rent Now</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-badge hot">Hot</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400" alt="Product">
+                        <button class="wishlist-btn" onclick="event.stopPropagation();"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Gaming</div>
+                        <h3 class="product-title">Gaming Console Bundle</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(201)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$25</span>
+                            <span class="period">/day</span>
+                        </div>
+                        <button class="btn-rent">Rent Now</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="Product">
+                        <button class="wishlist-btn" onclick="event.stopPropagation();"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Fashion</div>
+                        <h3 class="product-title">Designer Watch</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(92)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$15</span>
+                            <span class="period">/day</span>
+                        </div>
+                        <button class="btn-rent">Rent Now</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-badge">Featured</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400" alt="Product">
+                        <button class="wishlist-btn" onclick="event.stopPropagation();"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Sports</div>
+                        <h3 class="product-title">Mountain Bike</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(167)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$22</span>
+                            <span class="period">/day</span>
+                        </div>
+                        <button class="btn-rent">Rent Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Banners -->
+    <section class="promo-section">
+        <div class="container">
+            <div class="promo-grid">
+                <div class="promo-card promo-large">
+                    <div class="promo-content">
+                        <h3>Special Weekend Offer</h3>
+                        <p>Get 30% off on all vehicle rentals this weekend</p>
+                        <button class="btn btn-white" onclick="document.querySelector('.featured-section').scrollIntoView({behavior: 'smooth'});">Shop Now</button>
+                    </div>
+                </div>
+                <div class="promo-card promo-small">
+                    <div class="promo-content">
+                        <h4>Electronics Sale</h4>
+                        <p>Up to 25% off</p>
+                        <a href="#">Explore <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="promo-card promo-small">
+                    <div class="promo-content">
+                        <h4>New Arrivals</h4>
+                        <p>Check out latest items</p>
+                        <a href="#">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- #####################################-->
+    <!-- How It Works Section -->
+    <!-- #####################################-->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Browse & Search</h3>
+                    <p>Find the perfect item from thousands of rental options</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Book & Pay</h3>
+                    <p>Select your rental period and complete secure payment</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Receive & Enjoy</h3>
+                    <p>Get it delivered or pick it up and start using</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>Return</h3>
+                    <p>Return the item when done, hassle-free</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure Payments</h3>
+                    <p>100% secure payment processing</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer service</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>Easy Returns</h3>
+                    <p>Hassle-free return process</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Quality Guaranteed</h3>
+                    <p>All items verified and quality checked</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p>Get the latest deals and exclusive offers delivered to your inbox</p>
+                </div>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button class="btn btn-primary">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

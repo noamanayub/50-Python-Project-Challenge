@@ -1,0 +1,161 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Shopping Cart - RentHub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Shopping Cart</span>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <h1 class="page-title">Shopping Cart</h1>
+
+            <div class="cart-container">
+                <!-- Cart Items -->
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <h2>Your Items (<span id="itemCount">0</span>)</h2>
+                        <button class="clear-cart" onclick="clearCart()">
+                            <i class="fas fa-trash"></i> Clear Cart
+                        </button>
+                    </div>
+
+                    <div id="cartItemsList">
+                        <!-- Dynamic cart items will be loaded here -->
+                        {% comment %}
+                        Cart items should be passed from Django backend.
+                        For now, cart is empty until items are added via "Add to Cart" buttons.
+                        {% endcomment %}
+                    </div>
+
+                    <!-- Empty Cart Message -->
+                    <div id="emptyCart" style="display: block;">
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>Your cart is empty</h3>
+                            <p>Browse our catalog and add items to rent</p>
+                            <a href="{% url 'home' %}" class="btn btn-primary">Start Shopping</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Delivery Fee:</span>
+                        <span id="deliveryFee">$15.00</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Service Fee:</span>
+                        <span id="serviceFee">$10.00</span>
+                    </div>
+                    
+                    <div class="promo-code">
+                        <input type="text" placeholder="Enter promo code" id="promoInput">
+                        <button onclick="applyPromo()">Apply</button>
+                    </div>
+                    
+                    <div class="summary-row discount" id="discountRow" style="display: none;">
+                        <span>Discount:</span>
+                        <span class="discount-amount" id="discount">-$0.00</span>
+                    </div>
+                    
+                    <div class="summary-divider"></div>
+                    
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total">$383.00</span>
+                    </div>
+                    
+                    <div class="rental-dates">
+                        <div class="date-field">
+                            <label>Start Date:</label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div class="date-field">
+                            <label>Return Date:</label>
+                            <input type="date" id="returnDate" readonly>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-checkout" onclick="proceedToCheckout()">
+                        <i class="fas fa-lock"></i> Proceed to Checkout
+                    </button>
+                    
+                    <div class="secure-checkout">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure Checkout - SSL Encrypted</span>
+                    </div>
+                    
+                    <div class="accepted-payments">
+                        <p>We Accept:</p>
+                        <div class="payment-icons">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                            <i class="fab fa-cc-amex"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommended Items -->
+    <section class="recommended-section">
+        <div class="container">
+            <h2>You May Also Like</h2>
+            <div class="recommended-grid">
+                <div class="recommended-item">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" alt="Product">
+                    <h4>Designer Watch</h4>
+                    <p class="price">$15/day</p>
+                    <button class="btn-add-cart">Add to Cart</button>
+                </div>
+                <div class="recommended-item">
+                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=300" alt="Product">
+                    <h4>Gaming Console Bundle</h4>
+                    <p class="price">$25/day</p>
+                    <button class="btn-add-cart">Add to Cart</button>
+                </div>
+                <div class="recommended-item">
+                    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=300" alt="Product">
+                    <h4>Mountain Bike</h4>
+                    <p class="price">$22/day</p>
+                    <button class="btn-add-cart">Add to Cart</button>
+                </div>
+                <div class="recommended-item">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300" alt="Product">
+                    <h4>Modern Sofa Set</h4>
+                    <p class="price">$35/week</p>
+                    <button class="btn-add-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,453 @@
+/* ===========================
+   Reset & Variables
+   =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #b21900;
+    --secondary-color: #173641;
+    --white: #ffffff;
+    --light-gray: #f5f5f5;
+    --gray: #666666;
+    --dark-gray: #333333;
+    --border-color: #e0e0e0;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-gray);
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===========================
+   Header
+   =========================== */
+.auth-header {
+    background-color: var(--white);
+    padding: 20px 0;
+    box-shadow: var(--shadow);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.back-home {
+    color: var(--dark-gray);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.back-home:hover {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+}
+
+.back-home i {
+    margin-right: 5px;
+}
+
+/* ===========================
+   Auth Section
+   =========================== */
+.auth-section {
+    padding: 60px 0;
+}
+
+.auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.auth-box {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-header-box {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header-box h2 {
+    font-size: 28px;
+    color: var(--dark-gray);
+    margin-bottom: 10px;
+}
+
+.auth-header-box p {
+    color: var(--gray);
+    font-size: 16px;
+}
+
+/* ===========================
+   Forms
+   =========================== */
+.auth-form {
+    width: 100%;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark-gray);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-group label i {
+    color: var(--primary-color);
+    margin-right: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(178, 25, 0, 0.1);
+}
+
+.password-input {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    padding: 5px;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+.password-hint {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: var(--gray);
+}
+
+/* ===========================
+   Form Options
+   =========================== */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.remember-me input {
+    margin-right: 8px;
+    width: auto;
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: start;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.terms-checkbox input {
+    margin-right: 10px;
+    margin-top: 3px;
+    width: auto;
+}
+
+.terms-checkbox a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.terms-checkbox a:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   Buttons
+   =========================== */
+.btn {
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: #8f1400;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(178, 25, 0, 0.3);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* ===========================
+   Divider
+   =========================== */
+.divider {
+    text-align: center;
+    position: relative;
+    margin: 25px 0;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+.divider span {
+    position: relative;
+    background-color: var(--white);
+    padding: 0 15px;
+    color: var(--gray);
+    font-size: 14px;
+}
+
+/* ===========================
+   Social Login
+   =========================== */
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.btn-social {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid var(--border-color);
+    background-color: var(--white);
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-social:hover {
+    border-color: var(--dark-gray);
+    box-shadow: var(--shadow);
+}
+
+.btn-google i {
+    color: #db4437;
+}
+
+.btn-facebook i {
+    color: #4267B2;
+}
+
+/* ===========================
+   Auth Switch
+   =========================== */
+.auth-switch {
+    text-align: center;
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.auth-switch a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   Info Panel
+   =========================== */
+.info-panel {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 12px;
+    padding: 50px 40px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-content {
+    text-align: center;
+}
+
+.info-logo {
+    width: 180px;
+    margin: 0 auto 30px;
+}
+
+.info-content h3 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.benefits-list {
+    list-style: none;
+    text-align: left;
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.benefits-list li i {
+    font-size: 24px;
+    margin-right: 15px;
+    color: var(--white);
+}
+
+/* ===========================
+   Animations
+   =========================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-box {
+    animation: fadeIn 0.5s ease;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 968px) {
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-panel {
+        order: -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .auth-box {
+        padding: 30px 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .auth-header-box h2 {
+        font-size: 24px;
+    }
+    
+    .info-panel {
+        padding: 30px 20px;
+    }
+    
+    .info-logo {
+        width: 140px;
+    }
+    
+    .info-content h3 {
+        font-size: 22px;
+    }
+}

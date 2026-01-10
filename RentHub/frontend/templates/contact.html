@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block title %}Contact Us - RentHub{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you</p>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 60px 0;">
+    <div class="container">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                    <p>123 Rental Street<br>New York, NY 10001<br>United States</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-phone"></i> Phone</h3>
+                    <p>+1 234 567 8900<br>Monday - Friday: 9AM - 6PM EST</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p>support@renthub.com<br>info@renthub.com</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-share-alt"></i> Social Media</h3>
+                    <p>
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-facebook"></i> Facebook</a><br>
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-twitter"></i> Twitter</a><br>
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-instagram"></i> Instagram</a>
+                    </p>
+                </div>
+            </div>
+            
+            <h2>Send us a message</h2>
+            <form method="POST" style="margin-top: 30px;">
+                {% csrf_token %}
+                <div style="margin-bottom: 20px;">
+                    <label>Name *</label>
+                    <input type="text" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label>Email *</label>
+                    <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label>Message *</label>
+                    <textarea name="message" required rows="5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

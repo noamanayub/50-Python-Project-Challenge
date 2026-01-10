@@ -1,0 +1,230 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}My Account - RentHub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/account.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="account-section">
+        <div class="container">
+            <h1 class="page-title">My Account</h1>
+            
+            <div class="account-layout">
+                <aside class="account-sidebar">
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name={{ user.first_name }}+{{ user.last_name }}&background=b21900&color=fff&size=100" alt="{{ user.get_full_name }}">
+                        <h3>{{ user.get_full_name|default:user.username }}</h3>
+                        <p>{{ user.email }}</p>
+                    </div>
+                    
+                    <nav class="account-menu">
+                        <a href="#" class="menu-item active" onclick="showSection('dashboard')">
+                            <i class="fas fa-th-large"></i> Dashboard
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('rentals')">
+                            <i class="fas fa-box"></i> My Rentals
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('wishlist')">
+                            <i class="fas fa-heart"></i> Wishlist
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('profile')">
+                            <i class="fas fa-user"></i> Profile Settings
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('addresses')">
+                            <i class="fas fa-map-marker-alt"></i> Addresses
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('payments')">
+                            <i class="fas fa-credit-card"></i> Payment Methods
+                        </a>
+                        <a href="#" class="menu-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </nav>
+                </aside>
+
+                <main class="account-content">
+                    <!-- Dashboard -->
+                    <div id="dashboard" class="content-section active">
+                        <h2>Welcome, {{ user.first_name }}!</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <i class="fas fa-box"></i>
+                                <h3>{{ active_rentals }}</h3>
+                                <p>Active Rentals</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-history"></i>
+                                <h3>{{ total_orders }}</h3>
+                                <p>Total Orders</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-heart"></i>
+                                <h3>{{ wishlist_items.count }}</h3>
+                                <p>Wishlist Items</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-dollar-sign"></i>
+                                <h3>${{ total_spent|floatformat:2 }}</h3>
+                                <p>Total Spent</p>
+                            </div>
+                        </div>
+
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <i class="fas fa-check-circle success"></i>
+                                <div>
+                                    <h4>Rental Completed</h4>
+                                    <p>Professional Camera Kit - Returned on time</p>
+                                    <span class="date">2 days ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <i class="fas fa-truck info"></i>
+                                <div>
+                                    <h4>Item Delivered</h4>
+                                    <p>Power Drill Set - Delivered to your address</p>
+                                    <span class="date">1 week ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <i class="fas fa-shopping-cart primary"></i>
+                                <div>
+                                    <h4>New Rental</h4>
+                                    <p>Gaming Console Bundle - Order confirmed</p>
+                                    <span class="date">2 weeks ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- My Rentals -->
+                    <div id="rentals" class="content-section">
+                        <h2>My Rentals</h2>
+                        {% if orders %}
+                            <div class="rental-list">
+                                {% for order in orders %}
+                                <div class="rental-card">
+                                    <div class="rental-info">
+                                        <h4>Order #{{ order.order_number }}</h4>
+                                        <p class="rental-period">{{ order.start_date }} - {{ order.end_date }}</p>
+                                        <span class="status {{ order.status }}">{{ order.get_status_display }}</span>
+                                        <p class="price">${{ order.total }}</p>
+                                    </div>
+                                    <div class="rental-actions">
+                                        <span class="date">{{ order.created_at|date:"M d, Y" }}</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p>You don't have any orders yet. <a href="{% url 'home' %}">Start browsing!</a></p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Wishlist -->
+                    <div id="wishlist" class="content-section">
+                        <h2>My Wishlist ({{ wishlist_items.count }} items)</h2>
+                        {% if wishlist_items %}
+                            <div class="wishlist-grid">
+                                {% for item in wishlist_items %}
+                                <div class="wishlist-item">
+                                    <a href="{% url 'wishlist_toggle' item.product.id %}" class="remove-wishlist"><i class="fas fa-times"></i></a>
+                                    <img src="{{ item.product.main_image.url }}" alt="{{ item.product.title }}" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300'">
+                                    <h4>{{ item.product.title }}</h4>
+                                    <p class="price">${{ item.product.daily_rate }}/day</p>
+                                    <a href="{% url 'product_detail' item.product.slug %}" class="btn-small">View Details</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p>Your wishlist is empty. <a href="{% url 'home' %}">Browse products</a> and add items to your wishlist!</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Profile Settings -->
+                    <div id="profile" class="content-section">
+                        <h2>Profile Settings</h2>
+                        <form class="profile-form" method="POST" action="{% url 'account' %}">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" name="first_name" value="{{ user.first_name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" name="last_name" value="{{ user.last_name }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" value="{{ user.email }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="tel" name="phone" value="{{ profile.phone }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" name="address" value="{{ profile.address }}">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" name="city" value="{{ profile.city }}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Postal Code</label>
+                                    <input type="text" name="postal_code" value="{{ profile.postal_code }}">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- Addresses -->
+                    <div id="addresses" class="content-section">
+                        <h2>Saved Addresses</h2>
+                        <button class="btn btn-primary" style="margin-bottom: 20px;">+ Add New Address</button>
+                        <div class="address-grid">
+                            <div class="address-card">
+                                <span class="default-badge">Default</span>
+                                <h4>Home</h4>
+                                <p>123 Main Street<br>New York, NY 10001<br>United States</p>
+                                <div class="address-actions">
+                                    <button class="btn-text">Edit</button>
+                                    <button class="btn-text">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div id="payments" class="content-section">
+                        <h2>Payment Methods</h2>
+                        <button class="btn btn-primary" style="margin-bottom: 20px;">+ Add Payment Method</button>
+                        <div class="payment-list">
+                            <div class="payment-card">
+                                <i class="fab fa-cc-visa"></i>
+                                <div>
+                                    <h4>Visa ending in 4242</h4>
+                                    <p>Expires 12/2026</p>
+                                </div>
+                                <span class="default-badge">Default</span>
+                                <button class="btn-text">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/account.js' %}"></script>
+{% endblock %}

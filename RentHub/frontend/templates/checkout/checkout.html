@@ -1,0 +1,277 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Checkout - RentHub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Checkout Header -->
+    <header class="checkout-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="{% url 'home' %}" class="logo">
+                    <img src="{% static 'logo/renthub-transparent.png' %}" alt="RentHub">
+                </a>
+                <div class="checkout-steps">
+                    <div class="step active"><span>1</span> Cart</div>
+                    <div class="step active"><span>2</span> Checkout</div>
+                    <div class="step"><span>3</span> Payment</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="checkout-section">
+        <div class="container">
+            <h1 class="page-title">Checkout</h1>
+
+            <div class="checkout-layout">
+                <div class="checkout-form">
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-user"></i> Contact Information</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" required value="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" required value="Doe">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email Address *</label>
+                                <input type="email" required value="john.doe@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number *</label>
+                                <input type="tel" required value="+1 234 567 8900">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Address -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-map-marker-alt"></i> Delivery Address</h2>
+                        <div class="form-group">
+                            <label>Street Address *</label>
+                            <input type="text" required placeholder="123 Main Street">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City *</label>
+                                <input type="text" required placeholder="New York">
+                            </div>
+                            <div class="form-group">
+                                <label>State/Province *</label>
+                                <input type="text" required placeholder="NY">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Postal Code *</label>
+                                <input type="text" required placeholder="10001">
+                            </div>
+                            <div class="form-group">
+                                <label>Country *</label>
+                                <select required>
+                                    <option>United States</option>
+                                    <option>Canada</option>
+                                    <option>United Kingdom</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="saveAddress">
+                            <span>Save this address for future orders</span>
+                        </label>
+                    </div>
+
+                    <!-- Delivery Options -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-truck"></i> Delivery Options</h2>
+                        <div class="delivery-options">
+                            <label class="radio-option">
+                                <input type="radio" name="delivery" value="standard" checked>
+                                <div class="option-content">
+                                    <div>
+                                        <h4>Standard Delivery</h4>
+                                        <p>3-5 business days</p>
+                                    </div>
+                                    <span class="option-price">$15.00</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="delivery" value="express">
+                                <div class="option-content">
+                                    <div>
+                                        <h4>Express Delivery</h4>
+                                        <p>1-2 business days</p>
+                                    </div>
+                                    <span class="option-price">$35.00</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="delivery" value="pickup">
+                                <div class="option-content">
+                                    <div>
+                                        <h4>Self Pickup</h4>
+                                        <p>Pickup from seller location</p>
+                                    </div>
+                                    <span class="option-price">Free</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-credit-card"></i> Payment Method</h2>
+                        <div class="payment-methods">
+                            <label class="radio-option">
+                                <input type="radio" name="payment" value="card" checked>
+                                <div class="option-content">
+                                    <div>
+                                        <h4><i class="fas fa-credit-card"></i> Credit/Debit Card</h4>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="payment" value="paypal">
+                                <div class="option-content">
+                                    <div>
+                                        <h4><i class="fab fa-paypal"></i> PayPal</h4>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="cardDetails" class="payment-details">
+                            <div class="form-group">
+                                <label>Card Number *</label>
+                                <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Expiry Date *</label>
+                                    <input type="text" placeholder="MM/YY" maxlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV *</label>
+                                    <input type="text" placeholder="123" maxlength="3">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Cardholder Name *</label>
+                                <input type="text" placeholder="John Doe">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-comment"></i> Additional Notes</h2>
+                        <textarea placeholder="Any special instructions or notes..." rows="4"></textarea>
+                    </div>
+
+                    <!-- Terms -->
+                    <div class="form-section">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <span>I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Rental Policy</a></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary-sticky">
+                    <div class="order-summary">
+                        <h2>Order Summary</h2>
+
+                        <div class="order-items">
+                            <div class="order-item">
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=80" alt="Item">
+                                <div>
+                                    <h4>Professional Camera Kit</h4>
+                                    <p>1 Week × 1</p>
+                                </div>
+                                <span>$280.00</span>
+                            </div>
+                            <div class="order-item">
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=80" alt="Item">
+                                <div>
+                                    <h4>Wireless Headphones</h4>
+                                    <p>3 Days × 2</p>
+                                </div>
+                                <span>$60.00</span>
+                            </div>
+                            <div class="order-item">
+                                <img src="https://images.unsplash.com/photo-1586920740099-44f76d89c44b?w=80" alt="Item">
+                                <div>
+                                    <h4>Power Drill Set</h4>
+                                    <p>1 Day × 1</p>
+                                </div>
+                                <span>$18.00</span>
+                            </div>
+                        </div>
+
+                        <div class="summary-calculations">
+                            <div class="summary-row">
+                                <span>Subtotal:</span>
+                                <span>$358.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Delivery Fee:</span>
+                                <span id="deliveryFeeAmount">$15.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Service Fee:</span>
+                                <span>$10.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Tax (8%):</span>
+                                <span>$30.64</span>
+                            </div>
+                            <div class="summary-divider"></div>
+                            <div class="summary-row total">
+                                <span>Total:</span>
+                                <span id="totalAmount">$413.64</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-place-order" onclick="placeOrder()">
+                            <i class="fas fa-lock"></i> Place Order
+                        </button>
+
+                        <div class="secure-badges">
+                            <div class="badge-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Secure Payment</span>
+                            </div>
+                            <div class="badge-item">
+                                <i class="fas fa-undo"></i>
+                                <span>Easy Returns</span>
+                            </div>
+                        </div>
+
+                        <div class="payment-icons">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                            <i class="fab fa-cc-amex"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/checkout.js' %}"></script>
+{% endblock %}

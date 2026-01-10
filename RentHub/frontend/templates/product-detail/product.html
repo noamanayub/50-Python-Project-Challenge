@@ -1,0 +1,283 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}{{ product.title }} - RentHub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="{% url 'category' product.category.slug %}">{{ product.category.name }}</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>{{ product.title }}</span>
+        </div>
+    </section>
+
+    <!-- Product Detail -->
+    <section class="product-detail-section">
+        <div class="container">
+            <div class="product-layout">
+                <!-- Image Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600" alt="Product" id="mainImage">
+                        <button class="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="thumbnail-gallery">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=150" alt="Thumbnail" class="active" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=150" alt="Thumbnail" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=150" alt="Thumbnail" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1606980623314-0b1be0a1a6b2?w=150" alt="Thumbnail" onclick="changeImage(this)">
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <div class="product-badge">Featured</div>
+                    <h1>Professional Camera Kit</h1>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-text">4.5 (124 reviews)</span>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="rental-price">
+                            <span class="price">$45</span>
+                            <span class="period">/day</span>
+                        </div>
+                        <div class="price-options">
+                            <span>3 Days: <strong>$120</strong></span>
+                            <span>1 Week: <strong>$280</strong></span>
+                            <span>1 Month: <strong>$1,000</strong></span>
+                        </div>
+                    </div>
+
+                    <p class="product-description">
+                        Professional-grade DSLR camera kit perfect for photography enthusiasts and professionals. 
+                        Includes camera body, 3 lenses (18-55mm, 50mm, 70-200mm), tripod, camera bag, and accessories. 
+                        Ideal for events, travel photography, or personal projects.
+                    </p>
+
+                    <div class="product-features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Verified Owner</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Insurance Available</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-truck"></i>
+                            <span>Free Delivery</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Easy Returns</span>
+                        </div>
+                    </div>
+
+                    <div class="rental-options">
+                        <div class="option-group">
+                            <label>Rental Period:</label>
+                            <select id="rentalPeriod" onchange="updatePrice()">
+                                <option value="1">1 Day - $45</option>
+                                <option value="3">3 Days - $120</option>
+                                <option value="7">1 Week - $280</option>
+                                <option value="30">1 Month - $1,000</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Quantity:</label>
+                            <div class="quantity-control">
+                                <button onclick="decreaseQty()">-</button>
+                                <input type="number" value="1" min="1" id="quantity">
+                                <button onclick="increaseQty()">+</button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Start Date:</label>
+                            <input type="date" id="startDate">
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="rentNow()">
+                            <i class="fas fa-shopping-cart"></i> Rent Now
+                        </button>
+                        <button class="btn btn-secondary" onclick="addToCart()">
+                            Add to Cart
+                        </button>
+                    </div>
+
+                    <div class="seller-info">
+                        <h3>Rented by</h3>
+                        <div class="seller-card">
+                            <img src="https://ui-avatars.com/api/?name=John+Smith&background=b21900&color=fff" alt="Seller">
+                            <div class="seller-details">
+                                <h4>John Smith</h4>
+                                <div class="seller-rating">
+                                    <i class="fas fa-star"></i> 4.9 (87 rentals)
+                                </div>
+                                <p>Member since 2023</p>
+                            </div>
+                            <button class="btn-contact">Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Section -->
+            <div class="product-tabs">
+                <div class="tab-header">
+                    <button class="tab-btn active" onclick="openTab('description')">Description</button>
+                    <button class="tab-btn" onclick="openTab('specifications')">Specifications</button>
+                    <button class="tab-btn" onclick="openTab('reviews')">Reviews</button>
+                    <button class="tab-btn" onclick="openTab('policies')">Rental Policies</button>
+                </div>
+
+                <div class="tab-content active" id="description">
+                    <h3>About this item</h3>
+                    <p>This professional camera kit is perfect for capturing stunning photos and videos. Whether you're shooting a wedding, 
+                    a corporate event, or working on a personal project, this complete kit has everything you need.</p>
+                    
+                    <h4>Includes:</h4>
+                    <ul>
+                        <li>Canon EOS 5D Mark IV Camera Body (30.4 MP Full-Frame CMOS Sensor)</li>
+                        <li>EF 24-70mm f/2.8L II USM Lens</li>
+                        <li>EF 50mm f/1.8 STM Lens</li>
+                        <li>EF 70-200mm f/2.8L IS III USM Lens</li>
+                        <li>Professional Tripod with Fluid Head</li>
+                        <li>Camera Bag (fits all equipment)</li>
+                        <li>2x 64GB SD Cards (Class 10)</li>
+                        <li>Extra Batteries and Charger</li>
+                        <li>Lens Filters and Cleaning Kit</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" id="specifications">
+                    <h3>Technical Specifications</h3>
+                    <table class="specs-table">
+                        <tr><td>Brand</td><td>Canon</td></tr>
+                        <tr><td>Model</td><td>EOS 5D Mark IV</td></tr>
+                        <tr><td>Sensor</td><td>30.4 MP Full-Frame CMOS</td></tr>
+                        <tr><td>ISO Range</td><td>100-32000 (expandable to 50-102400)</td></tr>
+                        <tr><td>Video</td><td>4K at 30fps, 1080p at 60fps</td></tr>
+                        <tr><td>Screen</td><td>3.2" Touchscreen LCD</td></tr>
+                        <tr><td>Connectivity</td><td>Wi-Fi, NFC, GPS</td></tr>
+                        <tr><td>Weight</td><td>890g (body only)</td></tr>
+                    </table>
+                </div>
+
+                <div class="tab-content" id="reviews">
+                    <h3>Customer Reviews</h3>
+                    <div class="reviews-summary">
+                        <div class="average-rating">
+                            <span class="rating-number">4.5</span>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p>Based on 124 reviews</p>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=173641&color=fff" alt="User">
+                            <div>
+                                <h4>Sarah Johnson</h4>
+                                <div class="stars small">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="review-date">2 weeks ago</span>
+                            </div>
+                        </div>
+                        <p class="review-text">Amazing camera kit! Everything was in perfect condition and the owner was very helpful. 
+                        Used it for a wedding shoot and got incredible results. Highly recommend!</p>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img src="https://ui-avatars.com/api/?name=Mike+Davis&background=173641&color=fff" alt="User">
+                            <div>
+                                <h4>Mike Davis</h4>
+                                <div class="stars small">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="review-date">1 month ago</span>
+                            </div>
+                        </div>
+                        <p class="review-text">Great equipment for the price. The lenses are professional quality. 
+                        Only minor issue was the pickup location, but overall excellent experience.</p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="policies">
+                    <h3>Rental Policies</h3>
+                    <div class="policy-section">
+                        <h4><i class="fas fa-calendar-check"></i> Booking & Pickup</h4>
+                        <ul>
+                            <li>Book at least 24 hours in advance</li>
+                            <li>Pickup available or free delivery within 10 miles</li>
+                            <li>Valid ID required at pickup</li>
+                            <li>Security deposit: $500 (fully refundable)</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4><i class="fas fa-shield-alt"></i> Damage & Insurance</h4>
+                        <ul>
+                            <li>Optional insurance available ($20/day)</li>
+                            <li>Covers accidental damage and theft</li>
+                            <li>Report any issues within 24 hours</li>
+                            <li>Normal wear and tear covered</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4><i class="fas fa-undo"></i> Returns & Cancellation</h4>
+                        <ul>
+                            <li>Free cancellation up to 48 hours before rental</li>
+                            <li>Return by agreed time or $50 late fee applies</li>
+                            <li>Equipment must be returned clean and in working condition</li>
+                            <li>Refund processed within 3-5 business days</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/product.js' %}"></script>
+{% endblock %}

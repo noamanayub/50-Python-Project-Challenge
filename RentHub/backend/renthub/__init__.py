@@ -1,0 +1,3 @@
+"""
+RentHub Django Project
+"""
